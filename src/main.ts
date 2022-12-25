@@ -11,7 +11,7 @@ async function main() {
   const order = await controller.getLatestOrder();
   const today = new Date();
   let yesterday = new Date(today.toDateString());
-  yesterday.setDate(yesterday.getDate() + 1);
+  yesterday.setDate(yesterday.getDate() - 1);
   if (order.date > yesterday && order.date <= today) {
     await controller.addToCalendar(order);
   }

@@ -1,4 +1,4 @@
-import { GCEvent, GCEventConverter } from "./gc-event";
+import { GCEvent, GCEventConverter } from "./model/gc-event";
 import {
   GCCreateEventParam,
   GoogleCalendarRepository,
@@ -20,6 +20,9 @@ export class GoogleCalendarRepositoryImpl implements GoogleCalendarRepository {
         param.endTime,
         options
       );
+      if (param.options?.color != undefined) {
+        data.setColor(param.options!.color!);
+      }
       const res = GCEventConverter.fromGAS(data);
       return res;
     } catch (e) {

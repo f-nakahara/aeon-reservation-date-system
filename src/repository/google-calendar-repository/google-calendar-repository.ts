@@ -13,5 +13,6 @@ export type GCCreateEventParam = {
     location?: string;
     guests?: string;
     sendInvites?: boolean;
+    color?: string;
   };
 };

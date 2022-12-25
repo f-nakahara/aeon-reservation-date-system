@@ -74,6 +74,7 @@ export class OrderController {
       endTime: order.deliveryDate.endTime,
       options: {
         location: order.address,
+        color: "3",
       },
     });
   }
