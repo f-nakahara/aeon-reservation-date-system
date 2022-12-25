@@ -1,11 +1,17 @@
 import { Order } from "../entity/order";
+import { GoogleCalendarRepository } from "../repository/google-calendar-repository/google-calendar-repository";
 import { GoogleMailRepository } from "../repository/google-mail-repository/google-mail-repository";
 
 export class OrderController {
   mailRepository: GoogleMailRepository;
+  calendarRepository: GoogleCalendarRepository;
 
-  constructor(param: { mailRepository: GoogleMailRepository }) {
+  constructor(param: {
+    mailRepository: GoogleMailRepository;
+    calendarRepository: GoogleCalendarRepository;
+  }) {
     this.mailRepository = param.mailRepository;
+    this.calendarRepository = param.calendarRepository;
   }
 
   async getLatestOrder(): Promise<Order> {
@@ -59,5 +65,16 @@ export class OrderController {
     let res = text.split(`[${key}] `)[1].split("\n")[0];
     res = res.replace("\r", "");
     return res;
+  }
+
+  async addToCalendar(order: Order): Promise<void> {
+    await this.calendarRepository.createEvent({
+      title: "イオンネットスーパー商品受取",
+      startTime: order.deliveryDate.startTime,
+      endTime: order.deliveryDate.endTime,
+      options: {
+        location: order.address,
+      },
+    });
   }
 }
