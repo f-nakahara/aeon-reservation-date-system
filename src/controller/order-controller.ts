@@ -18,6 +18,7 @@ export class OrderController {
     const threads = await this.mailRepository.search({
       query: {
         from: "aeonnetshop@aeonnetshop.com",
+        subject: "【イオンネットスーパー】ご注文を承りました",
       },
       start: 0,
       max: 1,

@@ -10,6 +10,7 @@ export type GMSearchParam = {
     to?: string;
     after?: Date;
     before?: Date;
+    subject?: string;
   };
   start: number;
   max: number;
